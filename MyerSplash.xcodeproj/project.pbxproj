@@ -17,6 +17,7 @@
 		54A562670BEC508CD1903C49 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A563C64A027840336DE12B /* Keys.swift */; };
 		54A5633E122F31E30C40824D /* SettingsSwitchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A563330188B6094B9D072F /* SettingsSwitchItem.swift */; };
 		54A56436968DEEDE565A1488 /* LoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A568C6D6C5849AEBC6D6C0 /* LoadingFooterView.swift */; };
+		54A56452EA2B7115BF2CDBA6 /* MiscExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A56435B1C59D948C33519E /* MiscExtension.swift */; };
 		54A5646DE8E2778738D9664F /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A560D859A7C4BEFD55ADD4 /* ImageDetailView.swift */; };
 		54A56482196A6EC512092AEF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A56CE7F08B021F8D7FA69F /* MainViewController.swift */; };
 		54A564FF41C576E8871B455C /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A5610ACB2BC8B7B3465EE3 /* Values.swift */; };
@@ -56,6 +57,7 @@
 		54A5627DD12058A08C88A28B /* RadioButtonGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		54A563330188B6094B9D072F /* SettingsSwitchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSwitchItem.swift; sourceTree = "<group>"; };
 		54A563C64A027840336DE12B /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		54A56435B1C59D948C33519E /* MiscExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiscExtension.swift; sourceTree = "<group>"; };
 		54A566581177A56512E3DE30 /* UnsplashImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsplashImage.swift; sourceTree = "<group>"; };
 		54A567873B60B294584A7F5A /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		54A567940B6AD767A48580B6 /* FontSizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSizes.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				54A56C6078DD80C3B26DA3F0 /* ColorExtension.swift */,
 				54A56F847E06CBA141699C1F /* StringExtension.swift */,
 				54A568D0616F40376A967B11 /* UserDefaultsExtension.swift */,
+				54A56435B1C59D948C33519E /* MiscExtension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				54A56CBA5A033F3AD5BED0EF /* SettingsView.swift in Sources */,
 				54A5611C988BDF72B7A5A7BD /* MainNavigationView.swift in Sources */,
 				54A5646DE8E2778738D9664F /* ImageDetailView.swift in Sources */,
+				54A56452EA2B7115BF2CDBA6 /* MiscExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

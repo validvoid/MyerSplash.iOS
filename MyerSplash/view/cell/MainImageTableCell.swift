@@ -7,15 +7,15 @@ public class MainImageTableCell: UITableViewCell {
     static let ID = "MainImageTableCell"
 
     private var downloadView: UIButton!
-    private var starView: UIImageView!
-    private var todayLabel: UILabel!
+    private var starView:     UIImageView!
+    private var todayLabel:   UILabel!
 
     private var bindImage: UnsplashImage?
 
     var mainImageView: UIImageView!
 
     var onClickMainImage: ((CGRect, UnsplashImage) -> Void)?
-    var onClickDownload: ((UnsplashImage) -> Void)?
+    var onClickDownload:  ((UnsplashImage) -> Void)?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCellStyle.default, reuseIdentifier: reuseIdentifier)
@@ -88,21 +88,34 @@ public class MainImageTableCell: UITableViewCell {
         todayLabel.isHidden = image.isUnsplash
     }
 
+    private func isImageCached() -> Bool {
+        guard let bindImage = bindImage,
+              let url = bindImage.listUrl else {
+            return false
+        }
+        return Cache.isCached(urlString: url)
+    }
+
     @objc
     private func onClickImage() {
         guard let bindImage = bindImage,
               let superView = superview else {
             return
         }
+
+        if (!isImageCached()) {
+            return
+        }
+
         let rect = superView.convert(frame, to: nil)
         onClickMainImage?(rect, bindImage)
     }
 
     @objc
     private func clickDownloadButton() {
-        if (bindImage != nil) {
+        if let image = bindImage {
             animateDownloadButton()
-            onClickDownload?(bindImage!)
+            onClickDownload?(image)
         }
     }
 

@@ -22,6 +22,7 @@ open class BaseViewController: UIViewController {
                          .attachTo(self.view)
                          .setMarginBottom(Dimensions.TOAST_MARGIN_BOTTOM)
                          .setText(text)
-                         .build().show()
+                         .build()
+                         .show()
     }
 }

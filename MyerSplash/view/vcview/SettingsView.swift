@@ -7,10 +7,10 @@ protocol SettingsViewDelegate {
 }
 
 class SettingsView: UIView {
-    private var titleView: UILabel!
-    private var closeView: UIButton!
+    private var titleView:          UILabel!
+    private var closeView:          UIButton!
     private var loadingQualityItem: SettingsItem!
-    private var savingQualityItem: SettingsItem!
+    private var savingQualityItem:  SettingsItem!
 
     private var scrollView: UIScrollView!
 
@@ -125,7 +125,7 @@ class SettingsView: UIView {
 
     private func popupListQualityChosenDialog() {
         let selected = UserDefaults.standard.integer(key: Keys.LOADING_QUALITY, defaultValue: 0)
-        let content = SingleChoiceDialog(
+        let content  = SingleChoiceDialog(
                 title: loadingQualityItem.title,
                 options: AppSettings.LOADING_OPTIONS,
                 selected: selected)
@@ -134,7 +134,7 @@ class SettingsView: UIView {
 
     private func popupSavingQualityChosenDialog() {
         let selected = UserDefaults.standard.integer(key: Keys.SAVING_QUALITY, defaultValue: 1)
-        let content = SingleChoiceDialog(
+        let content  = SingleChoiceDialog(
                 title: savingQualityItem.title,
                 options: AppSettings.SAVING_OPTIONS,
                 selected: selected)

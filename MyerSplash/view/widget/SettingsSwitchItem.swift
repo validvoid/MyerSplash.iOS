@@ -37,8 +37,8 @@ class SettingsSwitchItem: SettingsItem {
     }
 
     private func updateSwitchByKey() {
-        if (key != nil) {
-            switchButton.isOn = UserDefaults.standard.bool(key: key!, defaultValue: true)
+        if let key = key {
+            switchButton.isOn = UserDefaults.standard.bool(key: key, defaultValue: true)
         }
     }
 
@@ -50,8 +50,8 @@ class SettingsSwitchItem: SettingsItem {
     @objc
     private func onSwitchStatusChanged() {
         switchButton.setOn(!switchButton.isOn, animated: true)
-        if (key != nil) {
-            UserDefaults.standard.set(switchButton.isOn, forKey: key!)
+        if let key = key {
+            UserDefaults.standard.set(switchButton.isOn, forKey: key)
             onCheckedChanged?(switchButton.isOn)
         }
     }

@@ -42,7 +42,7 @@ class RadioButtonGroup: UIStackView {
 }
 
 class RadioButton: UIView {
-    private var tickIcon: UIImageView!
+    private var tickIcon:    UIImageView!
     private var contentView: UILabel!
 
     var checked: Bool = false {

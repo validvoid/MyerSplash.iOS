@@ -3,8 +3,8 @@ import Alamofire
 import SwiftyJSON
 
 class CloudService {
-    private static let PAGING_PARAM = "page"
-    private static let PER_PAGE_PARAM = "per_page"
+    private static let PAGING_PARAM     = "page"
+    private static let PER_PAGE_PARAM   = "per_page"
     private static let DEFAULT_PER_PAGE = 10
 
     static func getNewPhotos(page: Int = 0, callback: @escaping ([UnsplashImage]) -> Void) {
@@ -17,14 +17,14 @@ class CloudService {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
             switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let array = json.flatMap { s, json -> UnsplashImage? in
-                    UnsplashImage(json)
-                }
-                callback(array)
-            case .failure(let error):
-                print(error)
+                case .success(let value):
+                    let json = JSON(value)
+                    let array = json.flatMap { s, json -> UnsplashImage? in
+                        UnsplashImage(json)
+                    }
+                    callback(array)
+                case .failure(let error):
+                    print(error)
             }
         }
     }

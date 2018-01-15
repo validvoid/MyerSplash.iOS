@@ -7,8 +7,8 @@ protocol DialogContent {
 }
 
 class AlertDialog: DialogContent {
-    internal (set) var title: String? = nil
-    private (set) var content: String? = nil
+    internal (set) var title:   String? = nil
+    private (set) var  content: String? = nil
 
     init(title: String?, content: String?) {
         self.title = title
@@ -17,9 +17,9 @@ class AlertDialog: DialogContent {
 }
 
 class SingleChoiceDialog: DialogContent {
-    private (set) var options: [String]? = nil
-    internal (set) var title: String? = nil
-    private (set) var selected: Int = 0
+    private (set) var  options:  [String]? = nil
+    internal (set) var title:    String?   = nil
+    private (set) var  selected: Int       = 0
 
     init(title: String?, options: [String], selected: Int) {
         self.title = title
@@ -33,7 +33,7 @@ protocol SingleChoiceDelegate {
 }
 
 class DialogViewController: BaseViewController {
-    private var titleView: UILabel!
+    private var titleView:         UILabel!
     private var dialogContentView: UIView!
 
     private var dialogContent: DialogContent?

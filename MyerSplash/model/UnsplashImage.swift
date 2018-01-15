@@ -3,11 +3,11 @@ import UIKit
 import SwiftyJSON
 
 class UnsplashImage {
-    private (set) var id: String?
+    private (set) var id:    String?
     private (set) var color: String?
     private (set) var likes: Int = 0
-    private (set) var urls: ImageUrl?
-    private (set) var user: UnsplashUser?
+    private (set) var urls:  ImageUrl?
+    private (set) var user:  UnsplashUser?
     private (set) var isUnsplash = true
 
     var fileNameForDownload: String {
@@ -38,10 +38,10 @@ class UnsplashImage {
         get {
             let quality = AppSettings.loadingQuality()
             switch quality {
-            case 0: return urls?.regular
-            case 1: return urls?.small
-            case 2: return urls?.thumb
-            default: return urls?.regular
+                case 0: return urls?.regular
+                case 1: return urls?.small
+                case 2: return urls?.thumb
+                default: return urls?.regular
             }
         }
     }
@@ -50,10 +50,10 @@ class UnsplashImage {
         get {
             let quality = AppSettings.savingQuality()
             switch quality {
-            case 0: return urls?.raw
-            case 1: return urls?.full
-            case 2: return urls?.regular
-            default: return urls?.full
+                case 0: return urls?.raw
+                case 1: return urls?.full
+                case 2: return urls?.regular
+                default: return urls?.full
             }
         }
     }
@@ -98,8 +98,8 @@ class UnsplashImage {
 
     static func createToday() -> UnsplashImage {
         let today = UnsplashImage()
-        let urls = ImageUrl()
-        let user = UnsplashUser()
+        let urls  = ImageUrl()
+        let user  = UnsplashUser()
         user.userName = "JuniperPhoton"
         user.name = "JuniperPhoton"
         user.id = "JuniperPhoton"
@@ -128,11 +128,11 @@ class UnsplashImage {
 }
 
 class ImageUrl {
-    var raw: String?
-    var full: String?
+    var raw:     String?
+    var full:    String?
     var regular: String?
-    var small: String?
-    var thumb: String?
+    var small:   String?
+    var thumb:   String?
 
     init() {
 

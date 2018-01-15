@@ -9,13 +9,13 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         return width / 1.5
     }
 
-    private var images: [UnsplashImage] = [UnsplashImage]()
+    private var images:   [UnsplashImage] = [UnsplashImage]()
     private var mainView: MainView!
 
     private var loadingFooterView: LoadingFooterView!
 
-    private var paging = 1
-    private var loading = false
+    private var paging      = 1
+    private var loading     = false
     private var canLoadMore = false
 
     private var calculatedCellHeight: CGFloat = -1.0
@@ -183,7 +183,8 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let documentsURL
+                        = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let fileURL = documentsURL.appendingPathComponent(unsplashImage.fileName)
 
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])

@@ -6,9 +6,9 @@ class MainView: UIView {
     private var fab: FloatingActionButton!
 
     var imageDetailView: ImageDetailView!
-    var tableView: UITableView!
-    var refreshControl: UIRefreshControl!
-    var navigationView: MainNavigationView!
+    var tableView:       UITableView!
+    var refreshControl:  UIRefreshControl!
+    var navigationView:  MainNavigationView!
 
     var onRefresh: (() -> Void)?
 
@@ -60,7 +60,7 @@ class MainView: UIView {
         super.init(coder: aDecoder)
     }
 
-    private var animating = false
+    private var animating       = false
     private var startY: CGFloat = -1
 
     func hideFab() {

@@ -20,7 +20,7 @@ class FloatingActionButton: UIView {
         roundLayer.shadowOpacity = 0.3
 
         let imageLayer = CALayer()
-        let image = UIImage(named: "ic_search_white")!
+        let image      = UIImage(named: "ic_search_white")!
         imageLayer.contents = image.cgImage
         imageLayer.frame = CGRect(
                 x: (Dimensions.FAB_RADIUS - Dimensions.FAB_ICON_SIZE) / 2,

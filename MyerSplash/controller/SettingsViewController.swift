@@ -20,7 +20,8 @@ class SettingsViewController: BaseViewController, UIViewControllerTransitioningD
         view = settingsView
     }
 
-    @objc func onClick() {
+    @objc
+    private func onClick() {
         dismiss(animated: true)
     }
 

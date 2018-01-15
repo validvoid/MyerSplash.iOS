@@ -3,17 +3,17 @@ import SnapKit
 import UIKit
 
 class ToastView: UILabel {
-    static let PADDING = CGFloat(8)
+    static let PADDING                     = CGFloat(8)
     static let SHOWING_HIDING_DURATION_SEC = 0.2
-    static let STAYING_DURATION_SEC = 2.0
+    static let STAYING_DURATION_SEC        = 2.0
 
     /**
      Use the Builder of ToastView instead.
     **/
     class Builder {
-        private var text: String? = nil
-        private var marginBottom: Int = 0
-        private var root: UIView? = nil
+        private var text:         String? = nil
+        private var marginBottom: Int     = 0
+        private var root:         UIView? = nil
 
         init() {
         }
@@ -83,22 +83,25 @@ class ToastView: UILabel {
     }
 
     func show(_ lastTimeSec: Double = ToastView.STAYING_DURATION_SEC) {
-        let overallDuration = ToastView.SHOWING_HIDING_DURATION_SEC * 2 + lastTimeSec
+        let overallDuration         = ToastView.SHOWING_HIDING_DURATION_SEC * 2 + lastTimeSec
         let relativeShowingDuration = ToastView.SHOWING_HIDING_DURATION_SEC / overallDuration
 
-        UIView.animateKeyframes(withDuration: overallDuration, delay: 0.0, animations: { () -> Void in
-            UIView.addKeyframe(withRelativeStartTime: 0.0,
-                               relativeDuration: relativeShowingDuration) {
-                self.alpha = 1.0
-            }
+        UIView.animateKeyframes(withDuration: overallDuration,
+                                delay: 0.0,
+                                animations: { () -> Void in
+                                    UIView.addKeyframe(withRelativeStartTime: 0.0,
+                                                       relativeDuration: relativeShowingDuration) {
+                                        self.alpha = 1.0
+                                    }
 
-            UIView.addKeyframe(withRelativeStartTime: 1 - relativeShowingDuration,
-                               relativeDuration: relativeShowingDuration) {
-                self.alpha = 0.0
-            }
-        }, completion: { b in
-            self.removeFromSuperview()
-        })
+                                    UIView.addKeyframe(withRelativeStartTime: 1 - relativeShowingDuration,
+                                                       relativeDuration: relativeShowingDuration) {
+                                        self.alpha = 0.0
+                                    }
+                                },
+                                completion: { b in
+                                    self.removeFromSuperview()
+                                })
     }
 
     private func initUi() {
@@ -118,6 +121,6 @@ class ToastView: UILabel {
 
     override func drawText(in rect: CGRect) {
         super.drawText(in: UIEdgeInsetsInsetRect(rect,
-                UIEdgeInsetsMake(0, ToastView.PADDING, 0, ToastView.PADDING)))
+                                                 UIEdgeInsetsMake(0, ToastView.PADDING, 0, ToastView.PADDING)))
     }
 }

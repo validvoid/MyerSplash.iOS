@@ -1,22 +1,23 @@
 import Foundation
 
 class Request {
-    private (set) static var BASE_URL = "https://api.unsplash.com/"
-    private (set) static var PHOTO_URL = "https://api.unsplash.com/photos?"
-    private (set) static var FEATURED_PHOTO_URL = "https://api.unsplash.com/collections/featured?"
-    private (set) static var RANDOM_PHOTOS_URL = "https://api.unsplash.com/photos/random?"
-    private (set) static var SEARCH_URL = "https://api.unsplash.com/search/photos?"
+    static let BASE_URL           = "https://api.unsplash.com/"
+    static let PHOTO_URL          = "https://api.unsplash.com/photos?"
+    static let FEATURED_PHOTO_URL = "https://api.unsplash.com/collections/featured?"
+    static let RANDOM_PHOTOS_URL  = "https://api.unsplash.com/photos/random?"
+    static let SEARCH_URL         = "https://api.unsplash.com/search/photos?"
 
-    private (set) static var AUTO_CHANGE_WALLPAPER = "https://juniperphoton.net/myersplash/wallpapers/"
-    private (set) static var AUTO_CHANGE_WALLPAPER_THUMB = "https://juniperphoton.net/myersplash/wallpapers/thumbs/"
+    static let AUTO_CHANGE_WALLPAPER       = "https://juniperphoton.net/myersplash/wallpapers/"
+    static let AUTO_CHANGE_WALLPAPER_THUMB = "https://juniperphoton.net/myersplash/wallpapers/thumbs/"
 
-    private (set) static var ME_HOME_PAGE = "https://unsplash.com/@juniperphoton"
+    static let ME_HOME_PAGE = "https://unsplash.com/@juniperphoton"
 
-    private (set) static var CLIENT_ID_KEY = "client_id"
+    static let CLIENT_ID_KEY = "client_id"
 
-    private static var clientId: String = ""
-    private static var KEY_PLIST_NAME = "Key"
-    private static var UNSPLASH_KEY_NAME = "UnsplashKey"
+    static let KEY_PLIST_NAME    = "Key"
+    static let UNSPLASH_KEY_NAME = "UnsplashKey"
+
+    private (set) static var clientId: String = ""
 
     static func getClientId() -> String {
         if (clientId.isEmpty) {

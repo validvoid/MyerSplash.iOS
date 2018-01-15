@@ -12,7 +12,7 @@ public class MainNavigationView: UIView {
     private var settingsView:   UIButton!
     private var backgroundView: UIVisualEffectView!
 
-    var title: String = "NEW" {
+    var title: String = "NEW" { //todo: extract this string value
         didSet {
             titleView.text = title
         }
@@ -22,6 +22,9 @@ public class MainNavigationView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+
+        let effectView = UIVisualEffectView()
+        effectView.effect = UIBlurEffect(style: .dark)
 
         titleView = UILabel(frame: CGRect.zero)
         titleView.font = titleView.font.with(traits: .traitBold, fontSize: FontSizes.TITLE_FONT_SIZE)
@@ -34,11 +37,15 @@ public class MainNavigationView: UIView {
         settingsView.setImage(UIImage(named: "ic_more_horiz_white"), for: .normal)
         settingsView.addTarget(self, action: #selector(onClickSettings), for: .touchUpInside)
 
+        addSubview(effectView)
         addSubview(titleView)
         addSubview(settingsView)
 
+        effectView.snp.makeConstraints { maker in
+            maker.left.right.top.bottom.equalTo(self)
+        }
         titleView.snp.makeConstraints { (maker) in
-            maker.left.equalToSuperview().offset(12)
+            maker.left.equalToSuperview().offset(Dimensions.TITLE_MARGIN)
             maker.centerY.equalTo(self).offset(12)
         }
         settingsView.snp.makeConstraints { (maker) in

@@ -9,6 +9,9 @@ class Dimensions {
     static let NAVIGATION_VIEW_HEIGHT:      CGFloat = 100
     static let NAVIGATION_ICON_SIZE:        CGFloat = 50
     static let IMAGE_DETAIL_EXTRA_HEIGHT:   CGFloat = 80
+    static let DUMMY_HEADER_HEIGHT:         CGFloat = 80
+
+    static let TITLE_MARGIN = 20
 
     static let TOAST_MARGIN_BOTTOM = 30
 

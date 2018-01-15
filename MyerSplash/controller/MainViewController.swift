@@ -159,15 +159,20 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
     private var lastScrollOffset: CGPoint = CGPoint(x: 0, y: 0)
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // We don't want the over-scrolling takes any showing & hiding effect.
+        if (scrollView.contentOffset.y <= 0) {
+            return
+        }
+
         if (scrollView.contentOffset.y + scrollView.frame.height > scrollView.contentSize.height) {
             loadMore()
         }
 
         let dy = scrollView.contentOffset.y - lastScrollOffset.y
         if (dy > 10) {
-            mainView.hideFab()
+            mainView.hideNavigationElements()
         } else if (dy < -10) {
-            mainView.showFab()
+            mainView.showNavigationElements()
         }
 
         lastScrollOffset = scrollView.contentOffset
@@ -197,7 +202,7 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
                 print("image downloaded!")
                 UIImageWriteToSavedPhotosAlbum(UIImage(contentsOfFile: imagePath)!, self, #selector(self.onSavedOrError), nil)
             } else {
-                print(response.error)
+                print("error while download image: %@", response.error)
             }
         }
     }

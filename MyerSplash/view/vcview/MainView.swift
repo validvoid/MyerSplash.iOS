@@ -5,6 +5,9 @@ import SnapKit
 class MainView: UIView {
     private var fab: FloatingActionButton!
 
+    private var animating       = false
+    private var startY: CGFloat = -1
+
     var imageDetailView: ImageDetailView!
     var tableView:       UITableView!
     var refreshControl:  UIRefreshControl!
@@ -33,10 +36,21 @@ class MainView: UIView {
         tableView.backgroundColor = UIColor.black
         tableView.refreshControl = refreshControl
 
+        let dummyHeader = UIView(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: UIScreen.main.bounds.width,
+                                               height: Dimensions.DUMMY_HEADER_HEIGHT))
+        tableView.tableHeaderView = dummyHeader
+
         addSubview(tableView)
         addSubview(fab)
         addSubview(navigationView)
         addSubview(imageDetailView)
+
+        refreshControl.snp.makeConstraints { maker in
+            maker.width.equalTo(UIScreen.main.bounds.width)
+            maker.height.equalTo(Dimensions.DUMMY_HEADER_HEIGHT)
+        }
 
         navigationView.snp.makeConstraints { (maker) in
             maker.height.equalTo(Dimensions.NAVIGATION_VIEW_HEIGHT)
@@ -45,9 +59,8 @@ class MainView: UIView {
             maker.top.equalTo(self)
         }
         tableView.snp.makeConstraints { (maker) in
-            maker.top.equalTo(navigationView.snp.bottom)
-            maker.bottom.equalTo(self.snp.bottom)
-            maker.width.equalTo(self.snp.width)
+            maker.height.equalTo(self)
+            maker.width.equalTo(self)
         }
         fab.snp.makeConstraints { (maker) in
             maker.width.height.equalTo(Dimensions.FAB_SIZE)
@@ -60,55 +73,80 @@ class MainView: UIView {
         super.init(coder: aDecoder)
     }
 
-    private var animating       = false
-    private var startY: CGFloat = -1
-
-    func hideFab() {
+    func hideNavigationElements() {
         if (animating) {
             return
         }
         if (startY == -1) {
             startY = self.fab.center.y
         }
+
+        fab.snp.remakeConstraints { (maker) in
+            maker.width.height.equalTo(Dimensions.FAB_SIZE)
+            maker.right.equalTo(self.snp.right).offset(-8)
+            maker.top.equalTo(self.snp.bottom).offset(8)
+        }
+
+        navigationView.snp.remakeConstraints { maker in
+            maker.height.equalTo(Dimensions.NAVIGATION_VIEW_HEIGHT)
+            maker.right.equalTo(self)
+            maker.left.equalTo(self)
+            maker.bottom.equalTo(self.snp.top)
+        }
+
         animating = true
         UIView.animate(
                 withDuration: Values.DEFAULT_ANIMATION_DURATION_SEC,
                 delay: 0,
                 options: UIViewAnimationOptions.curveEaseInOut,
                 animations: {
-                    self.fab.center = CGPoint(x: self.fab.center.x, y: self.startY + 100)
+                    self.layoutIfNeeded()
                 },
                 completion: { c in
                     self.animating = false
                 })
     }
 
-    func showFab() {
+    func showNavigationElements() {
         if (animating) {
             return
         }
         if (startY == -1) {
             startY = self.fab.center.y
         }
+
+        fab.snp.remakeConstraints { (maker) in
+            maker.width.height.equalTo(Dimensions.FAB_SIZE)
+            maker.right.equalTo(self.snp.right).offset(-8)
+            maker.bottom.equalTo(self.snp.bottom).offset(-8)
+        }
+
+        navigationView.snp.remakeConstraints { maker in
+            maker.height.equalTo(Dimensions.NAVIGATION_VIEW_HEIGHT)
+            maker.right.equalTo(self)
+            maker.left.equalTo(self)
+            maker.top.equalTo(self)
+        }
+
         animating = true
         UIView.animate(
                 withDuration: Values.DEFAULT_ANIMATION_DURATION_SEC,
                 delay: 0,
                 options: UIViewAnimationOptions.curveEaseInOut,
                 animations: {
-                    self.fab.center = CGPoint(x: self.fab.center.x, y: self.startY)
+                    self.layoutIfNeeded()
                 },
                 completion: { c in
                     self.animating = false
                 })
+    }
+
+    func stopRefresh() {
+        refreshControl.endRefreshing()
     }
 
     @objc
     private func onRefreshData() {
         onRefresh?()
-    }
-
-    func stopRefresh() {
-        refreshControl.endRefreshing()
     }
 }

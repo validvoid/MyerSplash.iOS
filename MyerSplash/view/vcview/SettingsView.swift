@@ -92,22 +92,22 @@ class SettingsView: UIView {
         addSubview(scrollView)
 
         titleView.snp.makeConstraints { maker in
-            maker.left.equalTo(self.snp.left).offset(12)
+            maker.left.equalTo(self.snp.left).offset(Dimensions.TITLE_MARGIN)
             maker.top.equalTo(self.snp.top).offset(40)
         }
         closeView.snp.makeConstraints { maker in
             maker.width.height.equalTo(Dimensions.NAVIGATION_ICON_SIZE)
-            maker.right.equalTo(self.snp.right).offset(-12)
+            maker.right.equalTo(self.snp.right).offset(-Dimensions.TITLE_MARGIN)
             maker.top.equalTo(titleView.snp.top)
             maker.bottom.equalTo(titleView.snp.bottom)
         }
         personalizationGroup.snp.makeConstraints { (maker) in
             maker.left.right.equalTo(self)
-            maker.top.equalTo(scrollView.snp.top).offset(12)
+            maker.top.equalTo(scrollView.snp.top).offset(Dimensions.TITLE_MARGIN)
         }
         qualityGroup.snp.makeConstraints { (maker) in
             maker.left.right.equalTo(self)
-            maker.top.equalTo(personalizationGroup.snp.bottom).offset(12)
+            maker.top.equalTo(personalizationGroup.snp.bottom).offset(Dimensions.TITLE_MARGIN)
         }
         scrollView.snp.makeConstraints { (maker) in
             maker.left.right.bottom.equalTo(self)

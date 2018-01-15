@@ -50,7 +50,7 @@ class SettingsItem: UIView {
 
         uiStack.snp.makeConstraints { maker in
             maker.centerY.equalTo(self)
-            maker.left.equalTo(self).offset(12)
+            maker.left.equalTo(self).offset(Dimensions.TITLE_MARGIN)
         }
 
         snp.makeConstraints { maker in

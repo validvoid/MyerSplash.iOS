@@ -75,7 +75,7 @@ class DialogViewController: BaseViewController {
         rootView.addSubview(dialogContentView)
 
         dialogContentView.snp.makeConstraints { maker in
-            maker.width.equalTo(UIScreen.main.bounds.width * 0.75)
+            maker.width.equalTo(UIScreen.main.bounds.width * 0.85)
             maker.height.equalTo(230)
             maker.center.equalTo(rootView)
         }

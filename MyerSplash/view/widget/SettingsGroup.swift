@@ -31,7 +31,8 @@ class SettingsGroup: UIStackView {
         addArrangedSubview(groupTitleView)
 
         groupTitleView.snp.remakeConstraints { (maker) in
-            maker.left.top.equalTo(self).offset(12)
+            maker.left.equalTo(self).offset(Dimensions.TITLE_MARGIN)
+            maker.top.equalTo(self).offset(12)
         }
     }
 

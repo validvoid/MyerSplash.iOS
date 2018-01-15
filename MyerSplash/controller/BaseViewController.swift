@@ -16,13 +16,4 @@ open class BaseViewController: UIViewController {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    func showToast(_ text: String) {
-        ToastView.Builder.init()
-                         .attachTo(self.view)
-                         .setMarginBottom(Dimensions.TOAST_MARGIN_BOTTOM)
-                         .setText(text)
-                         .build()
-                         .show()
-    }
 }

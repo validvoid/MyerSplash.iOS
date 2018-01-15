@@ -182,7 +182,7 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
     private func doDownload(_ unsplashImage: UnsplashImage) {
         print("downloading: \(unsplashImage.downloadUrl ?? "")")
 
-        showToast("Downloading in background...")
+        mainView.showToast("Downloading in background...")
 
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
@@ -211,9 +211,9 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
                                 didFinishSavingWithError error: Error?,
                                 contextInfo: UnsafeRawPointer) {
         if (error == nil) {
-            showToast("Saved to your album :D")
+            mainView.showToast("Saved to your album :D")
         } else {
-            showToast("Failed to download :(")
+            mainView.showToast("Failed to download :(")
         }
     }
 

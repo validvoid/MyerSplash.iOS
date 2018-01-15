@@ -28,7 +28,6 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setNeedsStatusBarAppearanceUpdate()
     }
 
     override func viewDidLoad() {

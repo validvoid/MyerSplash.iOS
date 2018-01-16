@@ -9,6 +9,10 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         return width / 1.5
     }
 
+    static let CELL_ANIMATE_OFFSET_X: CGFloat = 70.0
+    static let CELL_ANIMATE_DELAY_UNIT_SEC    = 0.3
+    static let CELL_ANIMATE_DURATION_SEC      = 0.6
+
     private var images:   [UnsplashImage] = [UnsplashImage]()
     private var mainView: MainView!
 
@@ -19,6 +23,9 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
     private var canLoadMore = false
 
     private var calculatedCellHeight: CGFloat = -1.0
+    private var initialMaxVisibleCellCount    = -1
+
+    private var cellDisplayAnimatedCount = 0
 
     private var tappedCell: UITableViewCell? = nil
 
@@ -79,10 +86,10 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         }
 
         loading = true
-        CloudService.getNewPhotos(page: paging) {
-            response in
+        CloudService.getNewPhotos(page: paging) { response in
             if (refreshing) {
                 self.images.removeAll(keepingCapacity: false)
+                self.cellDisplayAnimatedCount = 0
 
                 if (AppSettings.isTodayEnabled()) {
                     self.images.append(UnsplashImage.createToday())
@@ -145,6 +152,55 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         calculateAndCacheCellHeight()
         return calculatedCellHeight
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let count = calculateInitialMaxVisibleCellCount()
+        if (count < 0) {
+            return
+        }
+
+        if (cellDisplayAnimatedCount >= count) {
+            return
+        }
+
+        let index = indexPath.row
+        if (index >= count) {
+            return
+        }
+
+        let startX = cell.center.x
+        cell.alpha = 0.0
+        cell.center.x += MainViewController.CELL_ANIMATE_OFFSET_X
+
+        let delaySec = Double(index + 1) * MainViewController.CELL_ANIMATE_DELAY_UNIT_SEC
+
+        UIView.animate(withDuration: MainViewController.CELL_ANIMATE_DURATION_SEC,
+                       delay: delaySec,
+                       options: UIViewAnimationOptions.curveEaseOut,
+                       animations: {
+                           cell.alpha = 1.0
+                           cell.center.x = startX
+                       },
+                       completion: nil)
+
+        cellDisplayAnimatedCount += 1
+    }
+
+    private func calculateInitialMaxVisibleCellCount() -> Int {
+        if (initialMaxVisibleCellCount == -1) {
+            calculateAndCacheCellHeight()
+
+            guard let tableView = mainView.tableView,
+                  let navigationView = mainView.navigationView else {
+                return initialMaxVisibleCellCount
+            }
+
+            let visibleHeight = tableView.frame.height - navigationView.frame.height
+            initialMaxVisibleCellCount = Int(ceil(Double(visibleHeight) / Double(calculatedCellHeight)))
+        }
+
+        return initialMaxVisibleCellCount
     }
 
     private func calculateAndCacheCellHeight() {

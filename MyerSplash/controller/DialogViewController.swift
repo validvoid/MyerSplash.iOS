@@ -64,7 +64,7 @@ class DialogViewController: BaseViewController {
         dialogContentView.addGestureRecognizer(UITapGestureRecognizer())
 
         titleView = UILabel()
-        titleView.text = dialogContent.title
+        titleView.text = dialogContent.title?.uppercased()
         titleView.textColor = UIColor.white
         titleView.font = titleView.font.with(traits: .traitBold, fontSize: 20)
 

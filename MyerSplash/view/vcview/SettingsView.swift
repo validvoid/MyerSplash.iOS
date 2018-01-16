@@ -48,14 +48,14 @@ class SettingsView: UIView {
         personalizationGroup.label = "PERSONALIZATION"
 
         let todaySwitch = SettingsSwitchItem(Keys.ENABLE_TODAY)
-        todaySwitch.title = "Enable today"
+        todaySwitch.title = "Today Highlight"
         todaySwitch.content = "Update every day"
         todaySwitch.onCheckedChanged = { newValue in
             self.shouldRefreshWhenDismiss = true
         }
 
         let quickDownload = SettingsSwitchItem(Keys.QUICK_DOWNLOAD)
-        quickDownload.title = "Quick download"
+        quickDownload.title = "Download shortcut"
         quickDownload.content = "Show download button in list"
         quickDownload.onCheckedChanged = { newValue in
             self.shouldRefreshWhenDismiss = true
@@ -68,14 +68,14 @@ class SettingsView: UIView {
         qualityGroup.label = "QUALITY"
 
         loadingQualityItem = SettingsItem(frame: CGRect.zero)
-        loadingQualityItem.title = "Loading quality in list"
+        loadingQualityItem.title = "Thumbnails"
         loadingQualityItem.content = AppSettings.LOADING_OPTIONS[AppSettings.loadingQuality()]
         loadingQualityItem.onClicked = {
             self.popupListQualityChosenDialog()
         }
 
         savingQualityItem = SettingsItem(frame: CGRect.zero)
-        savingQualityItem.title = "Saving quality"
+        savingQualityItem.title = "Save"
         savingQualityItem.content = AppSettings.SAVING_OPTIONS[AppSettings.savingQuality()]
         savingQualityItem.onClicked = {
             self.popupSavingQualityChosenDialog()
@@ -97,7 +97,7 @@ class SettingsView: UIView {
         }
         closeView.snp.makeConstraints { maker in
             maker.width.height.equalTo(Dimensions.NAVIGATION_ICON_SIZE)
-            maker.right.equalTo(self.snp.right).offset(-Dimensions.TITLE_MARGIN)
+            maker.right.equalTo(self.snp.right).offset(-12)
             maker.top.equalTo(titleView.snp.top)
             maker.bottom.equalTo(titleView.snp.bottom)
         }

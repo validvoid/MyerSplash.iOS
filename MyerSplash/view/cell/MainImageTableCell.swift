@@ -77,7 +77,7 @@ public class MainImageTableCell: UITableViewCell {
 
     func bind(image: UnsplashImage) {
         bindImage = image
-        contentView.backgroundColor = image.themeColor
+        contentView.backgroundColor = image.themeColor.getDarker(alpha: 0.7)
         mainImageView.image = nil
 
         downloadView.isHidden = !AppSettings.isQuickDownloadEnabled()

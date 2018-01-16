@@ -60,18 +60,24 @@ class UnsplashImage {
 
     var fileName: String {
         get {
-            return "\(user!.name!)-\(id!)-\(tagForDownload).jpg"
+            let name = user?.name ?? "author"
+            let id   = self.id ?? "id"
+            return "\(name)-\(id)-\(tagForDownload).jpg"
         }
     }
 
     private var tagForDownload: String {
         get {
-            return "full"
+            let quality = AppSettings.savingQuality()
+            switch quality {
+                case 0: return "raw"
+                case 2: return "regular"
+                default: return "full"
+            }
         }
     }
 
     init() {
-
     }
 
     init?(_ j: JSON?) {
@@ -135,7 +141,6 @@ class ImageUrl {
     var thumb:   String?
 
     init() {
-
     }
 
     init?(_ j: JSON?) {

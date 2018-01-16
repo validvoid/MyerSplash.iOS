@@ -87,20 +87,33 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
 
         loading = true
         CloudService.getNewPhotos(page: paging) { response in
-            if (refreshing) {
-                self.images.removeAll(keepingCapacity: false)
-                self.cellDisplayAnimatedCount = 0
-
-                if (AppSettings.isTodayEnabled()) {
-                    self.images.append(UnsplashImage.createToday())
-                }
-            }
-            self.images += response
-            self.mainView.tableView.reloadData()
-            self.mainView.stopRefresh()
+            self.processResponse(response: response, refreshing)
             self.loading = false
             self.canLoadMore = true
+            self.mainView.stopRefresh()
         }
+    }
+
+    private func processResponse(response: [UnsplashImage], _ refreshing: Bool) {
+        if (images.count >= 2 && response.count > 0) {
+            let firstResponseImage = response.first!
+            let firstExistImage    = images[1]
+            if (firstExistImage.id == firstResponseImage.id) {
+                return
+            }
+        }
+
+        if (refreshing) {
+            images.removeAll(keepingCapacity: false)
+            cellDisplayAnimatedCount = 0
+
+            if (AppSettings.isTodayEnabled()) {
+                images.append(UnsplashImage.createToday())
+            }
+        }
+
+        images += response
+        mainView.tableView.reloadData()
     }
 
     private func loadMore() {
@@ -231,6 +244,12 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         }
 
         lastScrollOffset = scrollView.contentOffset
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if (scrollView.contentOffset.y <= 0) {
+            mainView.showNavigationElements()
+        }
     }
 
     // MARK: cell callback

@@ -3,10 +3,14 @@ import UIKit
 import SnapKit
 
 class MainView: UIView {
+    enum AnimatingStatus {
+        case STILL, SHOWING, HIDING
+    }
+
     private var fab: FloatingActionButton!
 
-    private var animating       = false
-    private var startY: CGFloat = -1
+    private var animatingStatus: AnimatingStatus = AnimatingStatus.STILL
+    private var startY:          CGFloat         = -1
 
     var imageDetailView: ImageDetailView!
     var tableView:       UITableView!
@@ -74,9 +78,10 @@ class MainView: UIView {
     }
 
     func hideNavigationElements() {
-        if (animating) {
+        if (animatingStatus == AnimatingStatus.HIDING) {
             return
         }
+
         if (startY == -1) {
             startY = self.fab.center.y
         }
@@ -94,7 +99,8 @@ class MainView: UIView {
             maker.bottom.equalTo(self.snp.top)
         }
 
-        animating = true
+        animatingStatus = AnimatingStatus.HIDING
+
         UIView.animate(
                 withDuration: Values.DEFAULT_ANIMATION_DURATION_SEC,
                 delay: 0,
@@ -103,14 +109,15 @@ class MainView: UIView {
                     self.layoutIfNeeded()
                 },
                 completion: { c in
-                    self.animating = false
+                    self.animatingStatus = AnimatingStatus.STILL
                 })
     }
 
     func showNavigationElements() {
-        if (animating) {
+        if (animatingStatus == AnimatingStatus.SHOWING) {
             return
         }
+
         if (startY == -1) {
             startY = self.fab.center.y
         }
@@ -128,7 +135,8 @@ class MainView: UIView {
             maker.top.equalTo(self)
         }
 
-        animating = true
+        animatingStatus = AnimatingStatus.SHOWING
+
         UIView.animate(
                 withDuration: Values.DEFAULT_ANIMATION_DURATION_SEC,
                 delay: 0,
@@ -137,7 +145,7 @@ class MainView: UIView {
                     self.layoutIfNeeded()
                 },
                 completion: { c in
-                    self.animating = false
+                    self.animatingStatus = AnimatingStatus.STILL
                 })
     }
 

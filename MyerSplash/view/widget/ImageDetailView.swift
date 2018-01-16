@@ -131,7 +131,7 @@ class ImageDetailView: UIView {
             case UIGestureRecognizerState.began:
                 startX = mainImageView.center.x
                 startY = mainImageView.center.y
-                extraInformationView.isHidden = true
+                resetExtraInformationConstraint()
             case UIGestureRecognizerState.changed:
                 mainImageView.center.x = startX + translation.x
                 mainImageView.center.y = startY + translation.y
@@ -190,6 +190,15 @@ class ImageDetailView: UIView {
 
         downloadButton.setTitleColor(revertTextColor, for: .normal)
         downloadButton.backgroundColor = textColor
+    }
+
+    private func resetExtraInformationConstraint() {
+        extraInformationView.isHidden = true
+        extraInformationView.snp.remakeConstraints { maker in
+            maker.width.equalTo(UIScreen.main.bounds.width)
+            maker.height.equalTo(Dimensions.IMAGE_DETAIL_EXTRA_HEIGHT)
+            maker.bottom.equalTo(self.mainImageView.snp.bottom)
+        }
     }
 
     private func showInternal() {

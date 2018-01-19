@@ -102,6 +102,16 @@ class UnsplashImage {
         return image.id == "TodayImage"
     }
 
+    static func createTodayImageId() -> String {
+        return createTodayImageDateString()
+    }
+
+    static func createTodayImageDateString() -> String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMDD"
+        return df.string(from: Date())
+    }
+
     static func createToday() -> UnsplashImage {
         let today = UnsplashImage()
         let urls  = ImageUrl()
@@ -114,9 +124,7 @@ class UnsplashImage {
         profileUrl.html = Request.ME_HOME_PAGE
         user.links = profileUrl
 
-        let df = DateFormatter()
-        df.dateFormat = "yyyyMMDD"
-        let date = df.string(from: Date())
+        let date = createTodayImageDateString()
 
         urls.raw = "\(Request.AUTO_CHANGE_WALLPAPER)\(date).jpg"
         urls.full = "\(Request.AUTO_CHANGE_WALLPAPER)\(date).jpg"
@@ -125,7 +133,7 @@ class UnsplashImage {
         urls.thumb = "\(Request.AUTO_CHANGE_WALLPAPER_THUMB)\(date).jpg"
 
         today.color = "#ffffff"
-        today.id = "TodayImage"
+        today.id = createTodayImageId()
         today.urls = urls
         today.user = user
         today.isUnsplash = false

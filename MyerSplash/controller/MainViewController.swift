@@ -98,7 +98,15 @@ class MainViewController: BaseViewController, UITableViewDataSource, UITableView
         if (images.count >= 2 && response.count > 0) {
             let firstResponseImage = response.first!
             let firstExistImage    = images[1]
-            if (firstExistImage.id == firstResponseImage.id) {
+
+            let todayHighlightUpdated = !firstExistImage.isUnsplash
+                                        && firstExistImage.id != UnsplashImage.createTodayImageId()
+
+            let noNewData = firstExistImage.id == firstResponseImage.id
+
+            // Today highlight is not updated and the first images are match, skip reload data.
+            if (noNewData && !todayHighlightUpdated) {
+                mainView.showToast("No new data")
                 return
             }
         }
